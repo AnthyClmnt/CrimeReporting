@@ -15,22 +15,43 @@ public class ReportingIO {
             }
             String option = s.nextLine();
             switch (option) {
-                case "1":
-                    //enterDistrictInfo();
-                    break;
-                case "2":
-                    //enterIncidentInfo();
-                    break;
-                case "3":
-                    System.out.println("You chose option 3");
-                    break;
-                case "4":
+                case "1" -> enterDistrictInfo();
+                case "2" -> enterIncidentInfo();
+                case "3" -> System.out.println("You chose option 3");
+                case "4" -> {
                     System.out.println("You chose to quit");
                     quit = true;
-                    break;
-                default:
-                    System.out.println("Invalid Option!!");
+                }
+                default -> System.out.println("Invalid Option!!");
             }
         }
+    }
+
+    private static void enterDistrictInfo() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("--- Enter District Info ---");
+        System.out.print("District Name: ");
+        String distName = s.nextLine();
+        System.out.print("Crime Type: ");
+        String crimeType = s.nextLine();
+
+        //District newDistrict = new District(distName, crimeType);
+        //test
+        //System.out.println(newDistrict.getDistrictName());
+    }
+
+    private static void enterIncidentInfo() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("--- Enter Incident Info ---");
+        System.out.print("Postcode: ");
+        String postcode = s.nextLine();
+        System.out.print("Value of Stolen Goods: £");
+        String value = s.nextLine();
+        System.out.print("Date of Incident: ");
+        String date = s.nextLine();
+
+        //District newDistrict = new District(distName, crimeType);
+        //test
+        //System.out.println(newDistrict.getDistrictName());
     }
 }
