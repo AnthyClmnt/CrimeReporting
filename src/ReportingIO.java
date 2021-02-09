@@ -50,8 +50,10 @@ public class ReportingIO {
         System.out.print("Date of Incident: ");
         String date = s.nextLine();
 
-        //District newDistrict = new District(distName, crimeType);
+        Incident newIncident = new Incident(postcode, value, date);
         //test
-        //System.out.println(newDistrict.getDistrictName());
+        System.out.println(newIncident.getValue());
+        System.out.println(newIncident.getPostcode());
+        System.out.println(newIncident.getDate());
     }
 }
