@@ -1,0 +1,7 @@
+
+------Menu------
+1: District Data
+2: Incident Data
+3: Statistics
+4: Quit
+----------------
