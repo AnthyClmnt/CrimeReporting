@@ -35,9 +35,9 @@ public class ReportingIO {
         System.out.print("Crime Type: ");
         String crimeType = s.nextLine();
 
-        //District newDistrict = new District(distName, crimeType);
+        District newDistrict = new District(distName, crimeType);
         //test
-        //System.out.println(newDistrict.getDistrictName());
+        System.out.println(newDistrict.getDistrictName());
     }
 
     private static void enterIncidentInfo() {
