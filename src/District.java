@@ -14,4 +14,5 @@ public class District {
     public String getIncident() {
         return incident;
     }
+
 }
