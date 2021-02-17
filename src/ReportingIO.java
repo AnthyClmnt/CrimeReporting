@@ -10,9 +10,9 @@ public class ReportingIO {
         District newDist2 = new District("Durham", "Robbery");
         District newDist3 = new District("Durham", "Robbery");
 
-        Incident newInc1 = new Incident("NE4 5SN", "100", "10/02/21");
-        Incident newInc2 = new Incident("NE4 9SN", "6700", "03/01/21");
-        Incident newInc3 = new Incident("TS18 2SY", "12500", "27/11/20");
+        Incident newInc1 = new Incident("NE4 5SN", "100", "10/02/2021");
+        Incident newInc2 = new Incident("NE4 9SN", "6700", "03/01/2021");
+        Incident newInc3 = new Incident("TS18 2SY", "12500", "27/11/2020");
 
         List<District> districtList = new ArrayList<>();
         districtList.add(newDist1);
@@ -23,6 +23,8 @@ public class ReportingIO {
         incidentList.add(newInc1);
         incidentList.add(newInc2);
         incidentList.add(newInc3);
+
+        //System.out.println(incidentList + " " + districtList);
 
         Scanner s = new Scanner(System.in);
         boolean quit = false;
@@ -78,29 +80,19 @@ public class ReportingIO {
             System.out.println("------Menu------\n" +
                     "1: Highest Value Crime\n" +
                     "2: Average Value Crime\n" +
-                    "3: Return to main menu\n" +
+                    "3: All crimes > than £x\n" +
+                    "4: Return to main menu\n" +
                     "----------------");
 
             String option = s.nextLine();
             switch (option) {
                 case "1" -> new Reporting("highestValue", incidentList);
-                case "2" -> new Reporting("averageValue", incidentList);
-                case "3" -> { returnToMenu = true;
+                case "2" -> new Reporting("averageIncidentInYear", incidentList);
+                case "3" -> new Reporting("incident>£x", incidentList);
+                case "4" -> { returnToMenu = true;
                 }
                 default -> System.out.println("Invalid Option!!");
             }
         }
-
-        /*System.out.println("--- Enter District Name ---");
-        System.out.print("District Name: ");
-        String disAsked = s.nextLine();
-
-        districtList.forEach(distName ->{
-            if (disAsked.equals(distName.getDistrictName())){
-                System.out.println(distName.getIncident());
-            }
-        });
-
-         */
     }
 }
