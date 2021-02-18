@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Reporting {
     public Reporting(String opt, List<Incident> incidentList) {
-        if (opt.equals("highestValue")) {
+        /* if (opt.equals("highestValue")) {
             AtomicInteger max_value = new AtomicInteger();
             incidentList.forEach(distName ->{
                 String value = distName.getValue();
@@ -52,5 +52,7 @@ public class Reporting {
             }
             System.out.println("Average value for year " + inpYear + " is: £" + totalSum);
         }
+
+         */
     }
 }
