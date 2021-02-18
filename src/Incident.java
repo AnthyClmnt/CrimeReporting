@@ -1,10 +1,10 @@
 public class Incident {
     private String postcode;
-    private String value;
+    private double value;
     private String month;
-    private String year;
+    private int year;
 
-    public Incident(String postcode, String value, String month, String year) {
+    public Incident(String postcode, double value, String month, int year) {
         this.postcode = postcode;
         this.value = value;
         this.month = month;
@@ -15,7 +15,7 @@ public class Incident {
         return postcode;
     }
 
-    public String getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -23,7 +23,7 @@ public class Incident {
         return month;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 }
