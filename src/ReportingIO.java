@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReportingIO {
     public static void main(String[] args) throws FileNotFoundException {
-        Incident newInc1 = new Incident("NE4", 10.50, "February", 2020);
+        Incident newInc1 = new Incident("NE4", 10.50, "February", 2021);
         Incident newInc2 = new Incident("NE4", 6750.50, "March", 2021);
         Incident newInc3 = new Incident("TS18", 12500.00, "November", 2021);
         Incident newInc4 = new Incident("DH1", 35.40, "November", 2021);
@@ -78,9 +78,12 @@ public class ReportingIO {
         districtList.forEach(name -> System.out.println(name.getDistrictName() +": "+ name.getIncident()));
         incidentList.forEach(name -> System.out.println(name.getPostcode() +" "+ name.getYear() +" "+ name.getMonth() +" "+ name.getValue()));
 
-        Incident testInc = districtList.get(0).maxIncidentVal();
+        int testInc = districtList.get(0).avgIncValueInYear(2021);
         System.out.println(testInc);
-
+        List incOverAmount = districtList.get(0).incWithValGtrThan(5);
+        System.out.println(incOverAmount.get(0));
+        Incident testing = (Incident) incOverAmount.get(0);
+        System.out.println(testing.getPostcode());
     }
 
     /**
