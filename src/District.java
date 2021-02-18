@@ -31,14 +31,28 @@ public class District {
 
     public Incident maxIncidentVal() {
         List<Double> incValues = new ArrayList<>();
-        //Incident maxInc = burglaryList.get(0);
-        burglaryList.forEach(name -> {
-            incValues.add(name.getValue());
-        });
+        burglaryList.forEach(name -> incValues.add(name.getValue()));
 
         double maxVal = Collections.max(incValues);
         int maxInc = incValues.indexOf(maxVal);
         return burglaryList.get(maxInc);
     }
+
+    public int avgIncValueInYear(int year) {
+        int incAmount = burglaryList.size();
+        int totalVal = burglaryList.stream().filter(name -> name.getYear() == year).mapToInt(name -> (int) name.getValue()).sum();
+        return (totalVal/incAmount);
+    }
+
+    public List<Incident> incWithValGtrThan(int amount) {
+        List<Incident> incidentsOverAmount = new ArrayList<>();
+        burglaryList.forEach(name -> {
+            if (name.getValue() > Integer.parseInt(String.valueOf(amount))) {
+                incidentsOverAmount.add(name);
+            }
+        });
+        return incidentsOverAmount;
+    }
 }
+
 
