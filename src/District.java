@@ -1,8 +1,9 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class District {
     private String districtName;
-    private int incidentCount;
+    private List<String> burglaryList = new ArrayList<>();
 
     /**
      *
@@ -10,20 +11,23 @@ public class District {
      * @param incident
      */
 
-    public District(String districtName, int incident) {
+    public District(String districtName, String incident) {
         this.districtName = districtName;
-        this.incidentCount = incident;
+        this.burglaryList.add(incident);
     }
 
     public String getDistrictName() {
         return districtName;
     }
 
-    public int getIncident() {
-        return incidentCount;
+    public List<String> getIncident() {
+        return burglaryList;
     }
 
-    public void addIncident() {
-        this.incidentCount += 1;
+    public void addIncident(String newIncident){
+        burglaryList.add(newIncident);
     }
+
+
 }
+
