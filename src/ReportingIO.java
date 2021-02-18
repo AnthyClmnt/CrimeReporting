@@ -3,15 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
 /**
  * This is a special class for representing a main object. This
- *
  *
  * @author Anthony Clermont
  *
  */
-
 
 public class ReportingIO {
     public static void main(String[] args) throws FileNotFoundException {
@@ -69,29 +66,36 @@ public class ReportingIO {
     }
 
     /**
-     * This function is called, as a test, allowing me to test the system.
+     *
+     * This function is called, as a test, allowing me to test the system easily.
      * @param districtList, the function takes a list containing all the district objects
      * @param incidentList the function takes a list containing all the incident objects
      */
 
     private static void test(List<District> districtList, List<Incident> incidentList) {
+        //test function is called when user inputs option 5, this is not visible on the menu.
+
+        //Testing to see if hard coded data is stored correctly
         districtList.forEach(name -> System.out.println(name.getDistrictName() +": "+ name.getIncident()));
         incidentList.forEach(name -> System.out.println(name.getPostcode() +" "+ name.getYear() +" "+ name.getMonth() +" "+ name.getValue()));
 
+        //Testing to see if the function which retrieves the average incident value of a given year works correctly
         int testInc = districtList.get(0).avgIncValueInYear(2021);
         System.out.println(testInc);
 
-        List incOverAmount = districtList.get(0).incWithValGtrThan(5);
+        //Testing to see if the function which retrieves all incidents over a given amount works correctly
+        List<Incident> incOverAmount = districtList.get(0).incWithValGtrThan(5);
         System.out.println(incOverAmount.get(0));
-        Incident testing = (Incident) incOverAmount.get(0);
+        Incident testing = incOverAmount.get(0);
         System.out.println(testing.getPostcode());
     }
 
     /**
+     *
      * This function is called when user wants to enter district information.
-     * @param districtList, the function takes a list containing all the district objects
-     * @param districtPostcode does
-     * @param incidentList happy
+     * @param districtList, this function takes a list containing all the district objects
+     * @param districtPostcode, this function takes a hashmap, which connects postcodes with district names
+     * @param incidentList this function takes a list containing all the incident objects
      */
 
     private static void enterDistrictInfo(List<District> districtList, HashMap<String, String> districtPostcode, List<Incident> incidentList) {
@@ -141,10 +145,11 @@ public class ReportingIO {
     }
 
     /**
+     *
      * This function is called when a user wants to enter incident information
      * @param incidentList, the function takes a list containing all the incident objects
-     * @param districtPostcode so
-     * @param districtList so
+     * @param districtPostcode this function takes a hashmap, which connects postcodes with district names
+     * @param districtList this function takes a list containing all the district objects
      */
 
     private static void enterIncidentInfo(List<Incident> incidentList, HashMap<String, String> districtPostcode, List<District> districtList) {
@@ -193,9 +198,10 @@ public class ReportingIO {
     }
 
     /**
+     *
      * The function is called when the user wants to see statical analysis of the data
      * @param incidentList, the function takes a list containing all the incident objects
-     * @param districtList
+     * @param districtList this function takes a list containing all the district objects
      */
 
     private static void statistics(List<Incident> incidentList, List<District> districtList) {

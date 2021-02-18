@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Reporting {
+
+    /**
+     *
+     * @param opt is a parameter which is passed through from a user input,
+     *            which determines which option the user has chosen
+     * @param incidentList the function takes a list containing all the incident objects
+     * @param districtList this function takes a list containing all the district objects
+     */
+
     public Reporting(String opt, List<Incident> incidentList, List<District> districtList) {
         if (opt.equals("highestValue")) {
             List<Incident> maxIncEachDist = new ArrayList<>();
-            districtList.forEach(name -> {
-                maxIncEachDist.add(name.maxIncidentVal());
-            });
+            districtList.forEach(name -> maxIncEachDist.add(name.maxIncidentVal()));
             List<Double> maxIncEachDistVal = new ArrayList<>();
-            maxIncEachDist.forEach(name -> {
-                maxIncEachDistVal.add(name.getValue());
-            });
+            maxIncEachDist.forEach(name -> maxIncEachDistVal.add(name.getValue()));
             double maxVal = Collections.max(maxIncEachDistVal);
             int maxInc = maxIncEachDistVal.indexOf(maxVal);
             Incident maxIncObj = maxIncEachDist.get(maxInc);
