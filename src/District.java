@@ -31,8 +31,9 @@ public class District {
 
     public Incident maxIncidentVal() {
         List<Double> incValues = new ArrayList<>();
-        burglaryList.forEach(name -> incValues.add(name.getValue()));
-
+        burglaryList.forEach(name -> {
+            incValues.add(name.getValue());
+        });
         double maxVal = Collections.max(incValues);
         int maxInc = incValues.indexOf(maxVal);
         return burglaryList.get(maxInc);
@@ -54,5 +55,3 @@ public class District {
         return incidentsOverAmount;
     }
 }
-
-
