@@ -15,9 +15,7 @@ public class Incident {
         return postcode;
     }
 
-    public double getValue() {
-        return value;
-    }
+    public double getValue() { return value; }
 
     public String getMonth() {
         return month;
