@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -11,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class ReportingIO {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         Incident newInc1 = new Incident("NE4", 10.50, "February", 2021);
         Incident newInc2 = new Incident("NE4", 6750.50, "March", 2021);
         Incident newInc3 = new Incident("TS18", 12500.00, "November", 2020);
@@ -46,10 +44,15 @@ public class ReportingIO {
         Scanner s = new Scanner(System.in);
         boolean quit = false;
         while (!quit) {
-            Scanner input = new Scanner(new File("C:\\Users\\Anthony\\IdeaProjects\\HelloWorldExample\\src\\menu_text.txt"));
-            while (input.hasNextLine()) {
-                System.out.println(input.nextLine());
-            }
+            System.out.println("""
+                    
+                    ------Menu------
+                    1: District Data
+                    2: Incident Data
+                    3: Statistics
+                    4: Quit
+                    ----------------""");
+
             String option = s.nextLine();
             switch (option) {
                 case "1" -> enterDistrictInfo(districtList, districtPostcode, incidentList);
