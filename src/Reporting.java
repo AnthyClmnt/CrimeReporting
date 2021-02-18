@@ -1,22 +1,28 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Reporting {
-    public Reporting(String opt, List<Incident> incidentList) {
-        /* if (opt.equals("highestValue")) {
-            AtomicInteger max_value = new AtomicInteger();
-            incidentList.forEach(distName ->{
-                String value = distName.getValue();
-                int intValue = Integer.parseInt(value);
-                if (max_value.get() < intValue) {
-                    max_value.set(intValue);
-                }
+    public Reporting(String opt, List<Incident> incidentList, List<District> districtList) {
+        List<Incident> maxIncEachDist = new ArrayList<>();
+        if (opt.equals("highestValue")) {
+            districtList.forEach(name -> {
+                maxIncEachDist.add(name.maxIncidentVal());
             });
-            System.out.println("Max Value: £" + max_value);
+            List<Double> maxIncEachDistVal = new ArrayList<>();
+            maxIncEachDist.forEach(name -> {
+                maxIncEachDistVal.add(name.getValue());
+            });
+            double maxVal = Collections.max(maxIncEachDistVal);
+            int maxInc = maxIncEachDistVal.indexOf(maxVal);
+            Incident maxIncObj = maxIncEachDist.get(maxInc);
+            System.out.println("-- Largest Incident on Record --" + "\n Postcode: " + maxIncObj.getPostcode()+
+                    "\n Value: £" + maxIncObj.getValue() + "\n Date (mm/yyyy): " + maxIncObj.getMonth() +"/"+ maxIncObj.getYear());
         }
 
+        /*
         if (opt.equals("incident>£x")) {
             Scanner s = new Scanner(System.in);
             System.out.println("--- Enter Value ---");
@@ -31,6 +37,7 @@ public class Reporting {
                 }
             });
         }
+
 
         if (opt.equals("averageIncidentInYear")) {
             ArrayList<Integer> totalValues = new ArrayList<>();
