@@ -1,18 +1,29 @@
+
+
 public class District {
     private String districtName;
-    private String incident;
+    private int incidentCount;
 
-    public District(String districtName, String incident) {
+    /**
+     *
+     * @param districtName
+     * @param incident
+     */
+
+    public District(String districtName, int incident) {
         this.districtName = districtName;
-        this.incident = incident;
+        this.incidentCount = incident;
     }
 
     public String getDistrictName() {
         return districtName;
     }
 
-    public String getIncident() {
-        return incident;
+    public int getIncident() {
+        return incidentCount;
     }
 
+    public void addIncident() {
+        this.incidentCount += 1;
+    }
 }
