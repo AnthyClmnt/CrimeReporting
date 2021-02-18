@@ -1,17 +1,18 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class District {
     private String districtName;
-    private List<String> burglaryList = new ArrayList<>();
+    private List<Incident> burglaryList = new ArrayList<>();
 
     /**
      *
-     * @param districtName
-     * @param incident
+     * @param districtName is
+     * @param incident is
      */
 
-    public District(String districtName, String incident) {
+    public District(String districtName, Incident incident) {
         this.districtName = districtName;
         this.burglaryList.add(incident);
     }
@@ -20,14 +21,24 @@ public class District {
         return districtName;
     }
 
-    public List<String> getIncident() {
+    public List<Incident> getIncident() {
         return burglaryList;
     }
 
-    public void addIncident(String newIncident){
+    public void addIncident(Incident newIncident){
         burglaryList.add(newIncident);
     }
 
+    public Incident maxIncidentVal() {
+        List<Double> incValues = new ArrayList<>();
+        //Incident maxInc = burglaryList.get(0);
+        burglaryList.forEach(name -> {
+            incValues.add(name.getValue());
+        });
 
+        double maxVal = Collections.max(incValues);
+        int maxInc = incValues.indexOf(maxVal);
+        return burglaryList.get(maxInc);
+    }
 }
 

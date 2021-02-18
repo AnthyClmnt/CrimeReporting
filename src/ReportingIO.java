@@ -1,8 +1,8 @@
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 
 /**
  * This is a special class for representing a main object. This
@@ -20,10 +20,10 @@ public class ReportingIO {
         Incident newInc3 = new Incident("TS18", 12500.00, "November", 2021);
         Incident newInc4 = new Incident("DH1", 35.40, "November", 2021);
 
-        District newDist1 = new District("Newcastle", String.valueOf(newInc1));
-        newDist1.addIncident(String.valueOf(newInc2));
-        District newDist2 = new District("Durham",  String.valueOf(newInc4));
-        District newDist3 = new District("Teesside",  String.valueOf(newInc3));
+        District newDist1 = new District("Newcastle", newInc1);
+        newDist1.addIncident(newInc2);
+        District newDist2 = new District("Durham",  newInc4);
+        District newDist3 = new District("Teesside",  newInc3);
 
         HashMap<String, String> districtPostcode = new HashMap<>();
         districtPostcode.put("Newcastle", "NE4");
@@ -77,6 +77,10 @@ public class ReportingIO {
     private static void test(List<District> districtList, List<Incident> incidentList) {
         districtList.forEach(name -> System.out.println(name.getDistrictName() +": "+ name.getIncident()));
         incidentList.forEach(name -> System.out.println(name.getPostcode() +" "+ name.getYear() +" "+ name.getMonth() +" "+ name.getValue()));
+
+        Incident testInc = districtList.get(0).maxIncidentVal();
+        System.out.println(testInc);
+
     }
 
     /**
@@ -105,7 +109,7 @@ public class ReportingIO {
 
                 Incident newIncident = new Incident(postcode, Double.parseDouble(value), month, Integer.parseInt(year));
                 incidentList.add(newIncident);
-                name.addIncident(String.valueOf(newIncident));
+                name.addIncident(newIncident);
                 distFound.set(true);
             }
         });
@@ -127,7 +131,7 @@ public class ReportingIO {
             Incident newIncident = new Incident(newDistPostcode, Double.parseDouble(newValue), newMonth, Integer.parseInt(newYear));
             incidentList.add(newIncident);
 
-            District newDistrict = new District(distName, String.valueOf(newIncident));
+            District newDistrict = new District(distName, newIncident);
             districtList.add(newDistrict);
         }
     }
@@ -159,7 +163,7 @@ public class ReportingIO {
 
             districtList.forEach(name -> {
                 if (distName.equals(name.getDistrictName())) {
-                    name.addIncident(String.valueOf(newIncident));
+                    name.addIncident(newIncident);
                 }
             });
 
@@ -180,7 +184,7 @@ public class ReportingIO {
             Incident newIncident = new Incident(postcode, Double.parseDouble(value), month, Integer.parseInt(year));
             incidentList.add(newIncident);
 
-            District newDistrict = new District(newDistName, String.valueOf(newIncident));
+            District newDistrict = new District(newDistName, newIncident);
             districtList.add(newDistrict);
         }
     }
