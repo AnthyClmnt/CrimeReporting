@@ -18,7 +18,7 @@ public class ReportingIO {
         Incident newInc1 = new Incident("NE4", 10.50, "February", 2021);
         Incident newInc2 = new Incident("NE4", 6750.50, "March", 2021);
         Incident newInc3 = new Incident("TS18", 12500.00, "November", 2021);
-        Incident newInc4 = new Incident("DH1", 35.40, "November", 2021);
+        Incident newInc4 = new Incident("DH1", 35.47, "November", 2021);
 
         District newDist1 = new District("Newcastle", newInc1);
         newDist1.addIncident(newInc2);
@@ -57,7 +57,7 @@ public class ReportingIO {
             switch (option) {
                 case "1" -> enterDistrictInfo(districtList, districtPostcode, incidentList);
                 case "2" -> enterIncidentInfo(incidentList, districtPostcode, districtList);
-                case "3" -> statistics(incidentList);
+                case "3" -> statistics(incidentList, districtList);
                 case "5" -> test(districtList, incidentList);
                 case "4" -> {
                     System.out.println("You chose to quit");
@@ -169,7 +169,6 @@ public class ReportingIO {
                     name.addIncident(newIncident);
                 }
             });
-
         }
         else {
             System.out.print("District Name: ");
@@ -195,13 +194,15 @@ public class ReportingIO {
     /**
      * The function is called when the user wants to see statical analysis of the data
      * @param incidentList, the function takes a list containing all the incident objects
+     * @param districtList
      */
 
-    private static void statistics(List<Incident> incidentList) {
+    private static void statistics(List<Incident> incidentList, List<District> districtList) {
         Scanner s = new Scanner(System.in);
         boolean returnToMenu = false;
         while (!returnToMenu) {
             System.out.println("""
+                    
                     ------Menu------
                     1: Highest Value Crime
                     2: Average Value Crime
@@ -211,9 +212,9 @@ public class ReportingIO {
 
             String option = s.nextLine();
             switch (option) {
-                case "1" -> new Reporting("highestValue", incidentList);
-                case "2" -> new Reporting("averageIncidentInYear", incidentList);
-                case "3" -> new Reporting("incident>£x", incidentList);
+                case "1" -> new Reporting("highestValue", incidentList, districtList);
+                case "2" -> new Reporting("averageIncidentInYear", incidentList, districtList);
+                case "3" -> new Reporting("incident>£x", incidentList, districtList);
                 case "4" -> returnToMenu = true;
                 default -> System.out.println("Invalid Option!!");
             }
