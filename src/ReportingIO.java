@@ -17,7 +17,7 @@ public class ReportingIO {
     public static void main(String[] args) throws FileNotFoundException {
         Incident newInc1 = new Incident("NE4", 10.50, "February", 2021);
         Incident newInc2 = new Incident("NE4", 6750.50, "March", 2021);
-        Incident newInc3 = new Incident("TS18", 12500.00, "November", 2021);
+        Incident newInc3 = new Incident("TS18", 12500.00, "November", 2020);
         Incident newInc4 = new Incident("DH1", 35.47, "November", 2021);
 
         District newDist1 = new District("Newcastle", newInc1);
@@ -80,6 +80,7 @@ public class ReportingIO {
 
         int testInc = districtList.get(0).avgIncValueInYear(2021);
         System.out.println(testInc);
+
         List incOverAmount = districtList.get(0).incWithValGtrThan(5);
         System.out.println(incOverAmount.get(0));
         Incident testing = (Incident) incOverAmount.get(0);
