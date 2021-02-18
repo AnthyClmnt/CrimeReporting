@@ -1,9 +1,7 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -32,6 +30,10 @@ public class ReportingIO {
         districtPostcode.put("Durham", "DH1");
         districtPostcode.put("Sunderland", "SR1");
         districtPostcode.put("Teesside", "TS18");
+        districtPostcode.put("NE4", "Newcastle");
+        districtPostcode.put("DH1", "Durham");
+        districtPostcode.put("SR1", "Sunderland");
+        districtPostcode.put("TS18", "Teesside");
 
         List<District> districtList = new ArrayList<>();
         districtList.add(newDist1);
@@ -54,7 +56,7 @@ public class ReportingIO {
             String option = s.nextLine();
             switch (option) {
                 case "1" -> enterDistrictInfo(districtList, districtPostcode, incidentList);
-                case "2" -> enterIncidentInfo(incidentList);
+                case "2" -> enterIncidentInfo(incidentList, districtPostcode, districtList);
                 case "3" -> statistics(incidentList);
                 case "5" -> test(districtList, incidentList);
                 case "4" -> {
@@ -96,7 +98,7 @@ public class ReportingIO {
                 String postcode = districtPostcode.get(name.getDistrictName());
                 System.out.print("Value of Stolen Goods: £");
                 String value = s.nextLine();
-                System.out.print("Month of Incident (mm): ");
+                System.out.print("Month of Incident: ");
                 String month = s.nextLine();
                 System.out.print("Year of Incident (yyyy): ");
                 String year = s.nextLine();
@@ -120,6 +122,8 @@ public class ReportingIO {
             String newYear = s.nextLine();
 
             districtPostcode.put(distName, newDistPostcode);
+            districtPostcode.put(newDistPostcode, distName);
+
             Incident newIncident = new Incident(newDistPostcode, Double.parseDouble(newValue), newMonth, Integer.parseInt(newYear));
             incidentList.add(newIncident);
 
@@ -131,22 +135,54 @@ public class ReportingIO {
     /**
      * This function is called when a user wants to enter incident information
      * @param incidentList, the function takes a list containing all the incident objects
+     * @param districtPostcode so
+     * @param districtList so
      */
 
-    private static void enterIncidentInfo(List<Incident> incidentList) {
+    private static void enterIncidentInfo(List<Incident> incidentList, HashMap<String, String> districtPostcode, List<District> districtList) {
         Scanner s = new Scanner(System.in);
         System.out.println("--- Enter Incident Info ---");
         System.out.print("Postcode: ");
         String postcode = s.nextLine();
-        System.out.print("Value of Stolen Goods: £");
-        String value = s.nextLine();
-        System.out.print("Month of Incident (mm): ");
-        String month = s.nextLine();
-        System.out.print("Year of Incident (yyyy): ");
-        String year = s.nextLine();
 
-        Incident newIncident = new Incident(postcode, Double.parseDouble(value), month, Integer.parseInt(year));
-        incidentList.add(newIncident);
+        if (districtPostcode.containsValue(postcode)) {
+            String distName = districtPostcode.get(postcode);
+            System.out.print("Value of Stolen Goods: £");
+            String value = s.nextLine();
+            System.out.print("Month of Incident: ");
+            String month = s.nextLine();
+            System.out.print("Year of Incident (yyyy): ");
+            String year = s.nextLine();
+
+            Incident newIncident = new Incident(postcode, Double.parseDouble(value), month, Integer.parseInt(year));
+            incidentList.add(newIncident);
+
+            districtList.forEach(name -> {
+                if (distName.equals(name.getDistrictName())) {
+                    name.addIncident(String.valueOf(newIncident));
+                }
+            });
+
+        }
+        else {
+            System.out.print("District Name: ");
+            String newDistName = s.nextLine();
+            System.out.print("Value of Stolen Goods: £");
+            String value = s.nextLine();
+            System.out.print("Month of Incident: ");
+            String month = s.nextLine();
+            System.out.print("Year of Incident (yyyy): ");
+            String year = s.nextLine();
+
+            districtPostcode.put(newDistName, postcode);
+            districtPostcode.put(postcode, newDistName);
+
+            Incident newIncident = new Incident(postcode, Double.parseDouble(value), month, Integer.parseInt(year));
+            incidentList.add(newIncident);
+
+            District newDistrict = new District(newDistName, String.valueOf(newIncident));
+            districtList.add(newDistrict);
+        }
     }
 
     /**
