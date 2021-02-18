@@ -56,7 +56,7 @@ public class ReportingIO {
                 case "1" -> enterDistrictInfo(districtList, districtPostcode, incidentList);
                 case "2" -> enterIncidentInfo(incidentList);
                 case "3" -> statistics(incidentList);
-                case "5" -> test(districtList);
+                case "5" -> test(districtList, incidentList);
                 case "4" -> {
                     System.out.println("You chose to quit");
                     quit = true;
@@ -69,10 +69,12 @@ public class ReportingIO {
     /**
      * This function is called, as a test, allowing me to test the system.
      * @param districtList, the function takes a list containing all the district objects
+     * @param incidentList the function takes a list containing all the incident objects
      */
 
-    private static void test(List<District> districtList) {
+    private static void test(List<District> districtList, List<Incident> incidentList) {
         districtList.forEach(name -> System.out.println(name.getDistrictName() +": "+ name.getIncident()));
+        incidentList.forEach(name -> System.out.println(name.getPostcode() +" "+ name.getYear() +" "+ name.getMonth() +" "+ name.getValue()));
     }
 
     /**
@@ -108,9 +110,21 @@ public class ReportingIO {
 
         String distFoundString = String.valueOf(distFound);
         if (distFoundString.equals("false")) {
-            //District newDistrict = new District(distName, );
-            //districtList.add(newDistrict);
+            System.out.print("District Postcode: ");
+            String newDistPostcode = s.nextLine();
+            System.out.print("Value of Stolen Goods: £");
+            String newValue = s.nextLine();
+            System.out.print("Month of Incident (mm): ");
+            String newMonth = s.nextLine();
+            System.out.print("Year of Incident (yyyy): ");
+            String newYear = s.nextLine();
 
+            districtPostcode.put(distName, newDistPostcode);
+            Incident newIncident = new Incident(newDistPostcode, Double.parseDouble(newValue), newMonth, Integer.parseInt(newYear));
+            incidentList.add(newIncident);
+
+            District newDistrict = new District(distName, String.valueOf(newIncident));
+            districtList.add(newDistrict);
         }
     }
 
